@@ -60,6 +60,8 @@ class JuegoAdivina:
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
 
+#Realizar cambios
+
 if __name__ == "__main__":
     root = tk.Tk()
     juego = JuegoAdivina(root)
