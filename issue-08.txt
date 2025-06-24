@@ -1,0 +1,3 @@
+Nombre:  William
+Resultado : 41
+Intentos: 8
