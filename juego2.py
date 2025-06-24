@@ -2,11 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
+# Creando mi juego test
 class JuegoAdivina:
     def __init__(self, master):
         self.master = master
         master.title("Adivina el Número")
 
+        
         self.nombre = ""
         
         # *** CAMBIO 1: Modificar inicialización de variables ***
