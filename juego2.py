@@ -8,7 +8,10 @@ class JuegoAdivina:
         master.title("Adivina el Número")
 
         self.nombre = ""
-        
+        self.numero_secreto = random.randint(1, 100)
+        self.intentos = 0            else:
+                messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
+                self.master.destroy()
         # *** CAMBIO 1: Modificar inicialización de variables ***
         # ANTES: self.numero_secreto = random.randint(1, 100)
         # AHORA:
@@ -16,7 +19,6 @@ class JuegoAdivina:
         self.intentos = 0
         self.rango_min = 1       # NUEVO: rango mínimo
         self.rango_max = 100     # NUEVO: rango máximo
-
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
         self.label_bienvenida.pack()
@@ -91,6 +93,7 @@ class JuegoAdivina:
         self.boton_adivinar.pack()
 
     def verificar_intento(self):
+        
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
@@ -102,7 +105,10 @@ class JuegoAdivina:
                 messagebox.showwarning("Fuera de rango", f"Por favor, ingresa un número entre {self.rango_min} y {self.rango_max}.")
                 return
 
-            if intento < self.numero_secreto:
+            if self.intentos == 10:
+                messagebox.showinfo("Pista", "Perdiste. Numero de intentos maximo alcanzado")
+                self.master.destroy()
+            elif intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
             elif intento > self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
@@ -115,7 +121,6 @@ class JuegoAdivina:
             
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
-    
 
 if __name__ == "__main__":
     root = tk.Tk()
