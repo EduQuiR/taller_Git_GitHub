@@ -46,11 +46,15 @@ class JuegoAdivina:
         self.boton_adivinar.pack()
 
     def verificar_intento(self):
+        
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
 
-            if intento < self.numero_secreto:
+            if self.intentos == 10:
+                messagebox.showinfo("Pista", "Perdiste. Numero de intentos maximo alcanzado")
+                self.master.destroy()
+            elif intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
             elif intento > self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
