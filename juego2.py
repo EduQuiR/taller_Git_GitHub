@@ -24,10 +24,16 @@ class JuegoAdivina:
         self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
         self.boton_comenzar.pack()
 
+        self.label_intentos = tk.Label(master, text="", font=("Helvetica", 10))
+        self.label_intentos.pack()
+
         # Juego
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
+        #gregar el contador de intentos 
+        # self.label_intentos = tk.Button(master, text="Intentos: 0", font=('Helvetica', 10))
+
 
     def iniciar_juego(self):
         self.nombre = self.entry_nombre.get()
@@ -45,10 +51,14 @@ class JuegoAdivina:
         self.entry_intento.pack()
         self.boton_adivinar.pack()
 
+        #iniciar contador 
+        self.label_intentos.config(text="Intentos: 0")
+
     def verificar_intento(self):
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
+            self.label_intentos.config(text=f"Intentos: {self.intentos}")
 
             if intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
