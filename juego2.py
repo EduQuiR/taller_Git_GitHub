@@ -2,11 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
+# Creando mi juego test
 class JuegoAdivina:
     def __init__(self, master):
         self.master = master
         master.title("Adivina el Número")
 
+        
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
