@@ -65,6 +65,11 @@ class JuegoAdivina:
             else:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
                 self.master.destroy()
+            with open("resultados.txt", "a", encoding="utf-8") as archivo:
+                archivo.write(f"El nombre del jugador es {self.nombre}\n")
+                archivo.write(f"La cantidad de intentos fue de {self.intentos}\n")
+                archivo.write(f"Los intentos fueron {self.historial_intentos}\n")
+                archivo.write(f"El jugador gano!")
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
 
