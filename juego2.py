@@ -10,6 +10,7 @@ class JuegoAdivina:
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
+        self.limite_intentos = 10
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -57,8 +58,17 @@ class JuegoAdivina:
             else:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
                 self.master.destroy()
+                return  # Muy importante: no seguir evaluando si ya ganó
+
+            if self.intentos >= self.limite_intentos:
+                messagebox.showinfo("¡Fin del juego!", f"Lo siento {self.nombre}, no adivinaste el número. Era {self.numero_secreto}.")
+                self.master.destroy()
+
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
+
+if __name__ == "__main__":
+    root = tk.Tk()
 
 #Realizar cambios
 
