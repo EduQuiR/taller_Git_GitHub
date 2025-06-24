@@ -24,10 +24,16 @@ class JuegoAdivina:
         self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
         self.boton_comenzar.pack()
 
+        self.boton_reset = tk.Button(master, text="Reset juego", command=self.reset_juego)
+        self.boton_reset.pack()
+
         # Juego
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
+
+    def reset_juego(self):
+        pass
 
     def iniciar_juego(self):
         self.nombre = self.entry_nombre.get()
@@ -56,7 +62,8 @@ class JuegoAdivina:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
             else:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
-                self.master.destroy()
+                # self.master.destroy()
+                super().__init__(self.master)
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
 
