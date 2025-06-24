@@ -40,7 +40,7 @@ class JuegoAdivina:
         self.entry_nombre.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: tienes {self.intentos} intentos")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
@@ -49,6 +49,7 @@ class JuegoAdivina:
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
+            self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: tienes {self.intentos} intentos")
 
             if intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
