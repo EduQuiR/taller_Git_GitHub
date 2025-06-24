@@ -10,6 +10,7 @@ class JuegoAdivina:
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
+        self.gano = False
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -55,10 +56,24 @@ class JuegoAdivina:
             elif intento > self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
             else:
+                self.gano = True
+                self.guardar_juego()
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
                 self.master.destroy()
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
+
+
+    def guardar_juego(self):
+        with open ("resultados.txt", "a") as archivo:
+            resultado = "Ganaste" if self.gano else "Perdiste"
+            archivo.write(f"{self.nombre} - intentos: {self.intentos} - resultado: {resultado}\n")
+            
+    def cerrar_juego(self):
+        if not self.gano and self.nombre:
+            self.guardar_juego()
+        self.master.destroy()
+            
 
 #Realizar cambios
 
