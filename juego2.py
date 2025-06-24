@@ -6,6 +6,8 @@ class JuegoAdivina:
     def __init__(self, master):
         self.master = master
         master.title("Adivina el Número")
+        master.geometry("400x300") 
+
 
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
@@ -28,6 +30,9 @@ class JuegoAdivina:
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
+        
+        self.label_mensaje = tk.Label(master, text='', fg='blue')
+        self.label_mensaje.pack
 
     def iniciar_juego(self):
         self.nombre = self.entry_nombre.get()
@@ -40,7 +45,7 @@ class JuegoAdivina:
         self.entry_nombre.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_indicacion.config(text=f"{self.nombre}, todo bien? \nAdivina un número entre 1 y 100:")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
@@ -51,6 +56,7 @@ class JuegoAdivina:
             self.intentos += 1
 
             if intento < self.numero_secreto:
+                self.label_mensaje.config(text='demasiado bajo intenta otra vez')
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
             elif intento > self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
