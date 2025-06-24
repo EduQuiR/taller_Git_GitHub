@@ -23,7 +23,24 @@ class JuegoAdivina:
 
         self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
         self.boton_comenzar.pack()
+        
+        self.dificultad = tk.StringVar(value="medio")
 
+        #elegir dificultad
+        self.label_dificultad = tk.Label(master, text="Elegí la dificultad:")
+        self.label_dificultad.pack()
+
+        self.radio_facil = tk.Radiobutton(master, text="Fácil (1–50)", variable=self.dificultad, value="facil")
+        self.radio_facil.pack()
+
+        self.radio_medio = tk.Radiobutton(master, text="Medio (1–100)", variable=self.dificultad, value="medio")
+        self.radio_medio.pack()
+
+        self.radio_dificil = tk.Radiobutton(master, text="Difícil (1–200)", variable=self.dificultad, value="dificil")
+        self.radio_dificil.pack()
+
+        self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
+        self.boton_comenzar.pack()
         # Juego
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
