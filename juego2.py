@@ -8,7 +8,6 @@ class JuegoAdivina:
         master.title("Adivina el Número")
 
         self.nombre = ""
-        self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
 
         # Pantalla inicial
@@ -20,6 +19,13 @@ class JuegoAdivina:
 
         self.entry_nombre = tk.Entry(master)
         self.entry_nombre.pack()
+
+        # Que el usuario seleccione la dificultad en la que quiera jugar
+        self.label_dificultad = tk.Label(master, text="Ingrese 1 para la dificultad mas facil (numero del 0-50). Ingrese 2 para la dificultad media (numero del 0-100). Ingrese 3 para la dificultad mas dificl (numero del 0-200)")
+        self.label_dificultad.pack()
+
+        self.entry_dificultad = tk.Entry(master)
+        self.entry_dificultad.pack()
 
         self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
         self.boton_comenzar.pack()
@@ -34,13 +40,25 @@ class JuegoAdivina:
         if not self.nombre:
             messagebox.showwarning("Nombre vacío", "Por favor, escribe tu nombre.")
             return
+        
+        self.dificultad = self.entry_dificultad.get()
+        if self.dificultad not in ("1", "2", "3"):
+            messagebox.showwarning("Dificultad invalida", "Debes ingresar 1 (facil), 2 (media) o 3 (dificil)")
+            return
+        
+
+        rango = {"1": (0, 50), "2": (0, 100), "3": (0, 200)}[self.dificultad]
+        self.numero_secreto = random.randint(*rango)
+
 
         self.label_bienvenida.pack_forget()
         self.label_nombre.pack_forget()
         self.entry_nombre.pack_forget()
+        self.label_dificultad.pack_forget()
+        self.entry_dificultad.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre {rango[0]} y {rango[1]}:")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
