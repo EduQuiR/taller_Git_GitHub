@@ -8,8 +8,12 @@ class JuegoAdivina:
         master.title("Adivina el Número")
 
         self.nombre = ""
-        self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
+        self.numero_secreto = 0
+        self.rango_min = 1
+        self.rango_max = 100
+
+
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -17,6 +21,9 @@ class JuegoAdivina:
 
         self.label_nombre = tk.Label(master, text="Escribe tu nombre:")
         self.label_nombre.pack()
+
+        #Le permito al usuario agregar el nivel
+        #Aqui se supone que estaria la solucion no conseguida
 
         self.entry_nombre = tk.Entry(master)
         self.entry_nombre.pack()
