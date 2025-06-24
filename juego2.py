@@ -35,12 +35,14 @@ class JuegoAdivina:
             messagebox.showwarning("Nombre vacío", "Por favor, escribe tu nombre.")
             return
 
+        # Ocultar elementos de la pantalla inicial
         self.label_bienvenida.pack_forget()
         self.label_nombre.pack_forget()
         self.entry_nombre.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        # Mostrar elementos del juego
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: Intento {self.intentos + 1}")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
@@ -57,10 +59,13 @@ class JuegoAdivina:
             else:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
                 self.master.destroy()
+                return
+
+            # Limpiar entrada y actualizar label
+            self.entry_intento.delete(0, tk.END)
+            self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: Intento {self.intentos}")
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
-
-#Realizar cambios
 
 if __name__ == "__main__":
     root = tk.Tk()
