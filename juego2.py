@@ -41,6 +41,7 @@ class JuegoAdivina:
 
         # Juego
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
+        self.label_contador = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
 
@@ -74,7 +75,8 @@ class JuegoAdivina:
         self.boton_facil.pack_forget()
         self.boton_medio.pack_forget()
         self.boton_dificil.pack_forget()
-
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_contador.config(text=f"intentos: {self.intentos}")
         # Mostrar juego
         self.iniciar_juego()
 
@@ -84,6 +86,7 @@ class JuegoAdivina:
         # AHORA: Solo mostrar el juego
         self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre {self.rango_min} y {self.rango_max}:")
         self.label_indicacion.pack()
+        self.label_contador.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
 
@@ -91,6 +94,8 @@ class JuegoAdivina:
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
+            self.label_contador.config(text=f"intentos: {self.intentos}")
+            self.label_contador.pack()
 
             # *** CAMBIO 7: NUEVA validación de rango ***
             if intento < self.rango_min or intento > self.rango_max:
@@ -110,6 +115,7 @@ class JuegoAdivina:
             
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
+    
 
 if __name__ == "__main__":
     root = tk.Tk()
