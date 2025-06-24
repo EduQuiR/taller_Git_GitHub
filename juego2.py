@@ -10,6 +10,7 @@ class JuegoAdivina:
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
+        self.historial = []
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -49,6 +50,9 @@ class JuegoAdivina:
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
+            self.historial.append(intento)
+            messagebox.showinfo("El numero que agregaste es", self.historial)
+            
 
             if intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
