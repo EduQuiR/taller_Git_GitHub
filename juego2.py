@@ -8,7 +8,7 @@ class JuegoAdivina:
         master.title("Adivina el Número")
 
         self.nombre = ""
-        self.numero_secreto = random.randint(1, 100)
+        self.numero_secreto = random.randint(1, 5)
         self.intentos = 0
 
         # Pantalla inicial
@@ -24,16 +24,18 @@ class JuegoAdivina:
         self.boton_comenzar = tk.Button(master, text="Comenzar juego", command=self.iniciar_juego)
         self.boton_comenzar.pack()
 
-        self.boton_reset = tk.Button(master, text="Reset juego", command=self.reset_juego)
-        self.boton_reset.pack()
-
         # Juego
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
+        self.boton_reset = tk.Button(master, text="Reset juego", command=self.reset_juego)
 
     def reset_juego(self):
-        pass
+        self.numero_secreto = random.randint(1, 5)
+        self.intentos = 0
+        self.entry_intento.delete(0, tk.END)
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 5:")
+        messagebox.showinfo("Reiniciado", "¡Juego reiniciado!")
 
     def iniciar_juego(self):
         self.nombre = self.entry_nombre.get()
@@ -46,10 +48,11 @@ class JuegoAdivina:
         self.entry_nombre.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 5:")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
+        self.boton_reset.pack()  # Mostrar botón de reset al iniciar juego
 
     def verificar_intento(self):
         try:
@@ -62,12 +65,8 @@ class JuegoAdivina:
                 messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
             else:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
-                # self.master.destroy()
-                super().__init__(self.master)
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
-
-#Realizar cambios
 
 if __name__ == "__main__":
     root = tk.Tk()
