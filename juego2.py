@@ -9,7 +9,9 @@ class JuegoAdivina:
 
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
-        self.intentos = 0
+        self.intentos = 0            else:
+                messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
+                self.master.destroy()
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -65,6 +67,7 @@ class JuegoAdivina:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
 
 #Realizar cambios
+#prueba
 
 if __name__ == "__main__":
     root = tk.Tk()
