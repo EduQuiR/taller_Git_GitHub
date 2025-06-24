@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
-class JuegoAdivina:
+class JuegoAdivina: 
     def __init__(self, master):
         self.master = master
         master.title("Adivina el Número")
@@ -46,10 +46,11 @@ class JuegoAdivina:
         self.boton_adivinar.pack()
 
     def verificar_intento(self):
+        #contar la cantidad de intentos
         try:
             intento = int(self.entry_intento.get())
             self.intentos += 1
-
+            print(f"Intento #{self.intentos}: {intento}") #muestra la cantidad de intentos 
             if intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
             elif intento > self.numero_secreto:
