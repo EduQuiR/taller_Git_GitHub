@@ -50,13 +50,20 @@ class JuegoAdivina:
             intento = int(self.entry_intento.get())
             self.intentos += 1
 
-            if intento < self.numero_secreto:
-                messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
-            elif intento > self.numero_secreto:
-                messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
-            else:
+            if intento == self.numero_secreto:
                 messagebox.showinfo("¡Ganaste!", f"¡Felicidades {self.nombre}! Adivinaste el número en {self.intentos} intentos.")
                 self.master.destroy()
+
+            else:
+                if intento < self.numero_secreto:
+                    messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
+                elif intento > self.numero_secreto:
+                    messagebox.showinfo("Pista", "Demasiado alto. Intenta otra vez.")
+                
+                if self.intentos >= 10:
+                    messagebox.showinfo("¡Perdiste!", "Te quedaste sin intentos.")
+                    self.master.destroy()
+
         except ValueError:
             messagebox.showerror("Entrada inválida", "Por favor, ingresa un número válido.")
 
