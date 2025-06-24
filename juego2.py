@@ -10,6 +10,7 @@ class JuegoAdivina:
         self.nombre = ""
         self.numero_secreto = random.randint(1, 100)
         self.intentos = 0
+        self.historial_intentos = []
 
         # Pantalla inicial
         self.label_bienvenida = tk.Label(master, text="¡Bienvenido al juego!")
@@ -28,6 +29,7 @@ class JuegoAdivina:
         self.label_indicacion = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
         self.entry_intento = tk.Entry(master)
         self.boton_adivinar = tk.Button(master, text="Adivinar", command=self.verificar_intento)
+        self.label_historial_intentos = tk.Label(master, text="", font=('Helvetica', 10, 'bold'))
 
     def iniciar_juego(self):
         self.nombre = self.entry_nombre.get()
@@ -40,15 +42,21 @@ class JuegoAdivina:
         self.entry_nombre.pack_forget()
         self.boton_comenzar.pack_forget()
 
-        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100:")
+        self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: tienes {self.intentos} intentos")
         self.label_indicacion.pack()
         self.entry_intento.pack()
         self.boton_adivinar.pack()
+        self.label_historial_intentos.pack()
+
 
     def verificar_intento(self):
         try:
             intento = int(self.entry_intento.get())
+            self.historial_intentos.append(intento)
+            historial_texto = ", ".join(str(n) for n in self.historial_intentos)
+            self.label_historial_intentos.config(text=f"Intentos anteriores: {historial_texto}")
             self.intentos += 1
+            self.label_indicacion.config(text=f"{self.nombre}, adivina un número entre 1 y 100: tienes {self.intentos} intentos")
 
             if intento < self.numero_secreto:
                 messagebox.showinfo("Pista", "Demasiado bajo. Intenta otra vez.")
